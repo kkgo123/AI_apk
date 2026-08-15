@@ -1,0 +1,86 @@
+# 将此文件保存到仓库的 .github/workflows/android-build.yml
+name: Android Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_url:
+        description: '项目 ZIP 下载地址'
+        required: true
+      platform:
+        description: '目标平台 (apk / ipa)'
+        required: true
+        default: 'apk'
+      build_type:
+        description: '构建类型 (debug / release)'
+        required: true
+        default: 'debug'
+      callback_url:
+        description: '编译完成回调地址'
+        required: false
+      supabase_anon_key:
+        description: 'Supabase anon key（用于回调）'
+        required: false
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下载项目压缩包
+        run: curl -L "${{ github.event.inputs.project_url }}" -o project.zip
+
+      - name: 解压项目
+        run: |
+          mkdir -p project
+          unzip project.zip -d project/ || true
+          # 若只有一个子文件夹则进入
+          DIR=$(ls project/ | head -1)
+          if [ -d "project/$DIR" ]; then mv project/$DIR/* project/ && rmdir project/$DIR || true; fi
+
+      - name: 配置 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: 配置 Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 赋予 gradlew 权限
+        working-directory: ./project
+        run: chmod +x gradlew 2>/dev/null || true
+
+      - name: 编译（Debug）
+        if: ${{ github.event.inputs.build_type == 'debug' }}
+        working-directory: ./project
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: 编译（Release）
+        if: ${{ github.event.inputs.build_type == 'release' }}
+        working-directory: ./project
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: 上传 APK 产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ github.event.inputs.build_type }}
+          path: "**/*.apk"
+          retention-days: 7
+
+      - name: 回调通知
+        if: ${{ github.event.inputs.callback_url != '' }}
+        run: |
+          APK_PATH=$(find . -name "*.apk" | head -1)
+          if [ -f "$APK_PATH" ]; then
+            curl -X POST "${{ github.event.inputs.callback_url }}" \
+              -H "Authorization: Bearer ${{ github.event.inputs.supabase_anon_key }}" \
+              -F "status=completed" \
+              -F "run_id=${{ github.run_id }}" \
+              -F "logs=GitHub Actions 编译成功" \
+              -F "file=@$APK_PATH"
+          else
+            curl -X POST "${{ github.event.inputs.callback_url }}" \
+              -H "Authorization: Bearer ${{ github.event.inputs.supabase_anon_key }}" \
+              -H "Content-Type: application/json" \
+              -d '{"status":"failed","run_id":"${{ github.run_id }}","logs":"未找到 APK 产物"}'
+          fi
