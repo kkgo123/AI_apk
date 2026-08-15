@@ -32,10 +32,18 @@ jobs:
       - name: 解压项目
         run: |
           mkdir -p project
-          unzip project.zip -d project/ || true
-          # 若只有一个子文件夹则进入
-          DIR=$(ls project/ | head -1)
-          if [ -d "project/$DIR" ]; then mv project/$DIR/* project/ && rmdir project/$DIR || true; fi
+          unzip -q project.zip -d project/ || true
+          # 进入最深的包含 gradlew 的目录
+          while [ ! -f project/gradlew ] && [ "$(ls -1 project/ | wc -l)" -eq 1 ]; do
+            DIR=$(ls project/ | head -1)
+            if [ -d "project/$DIR" ]; then
+              mv project/$DIR/* project/
+              rmdir "project/$DIR"
+            else
+              break
+            fi
+          done
+          ls -la project/ | head -20
 
       - name: 配置 JDK 17
         uses: actions/setup-java@v4
