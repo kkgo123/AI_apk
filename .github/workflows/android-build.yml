@@ -125,4 +125,3 @@ jobs:
               -H "Content-Type: application/json" \
               -d "{\"status\":\"failed\",\"run_id\":\"${{ github.run_id }}\",\"logs\":\"未找到 APK 产物。日志：${LOGS}\"}"
           fi
-
