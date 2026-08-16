@@ -1,4 +1,3 @@
-# 将此文件保存到仓库的 .github/workflows/android-build.yml
 name: Android Build
 
 on:
@@ -26,13 +25,39 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
+      - name: 安装解压工具
+        run: sudo apt-get update && sudo apt-get install -y unzip p7zip-full p7zip-rar tar
+
       - name: 下载项目压缩包
-        run: curl -L "${{ github.event.inputs.project_url }}" -o project.zip
+        run: |
+          echo "开始下载..."
+          curl -L "${{ github.event.inputs.project_url }}" -o project.download
+          echo "下载完成。文件信息："
+          ls -lh project.download
+          echo "文件真实类型："
+          file project.download
 
       - name: 解压项目并定位 Gradle
         run: |
           mkdir -p project
-          unzip -q project.zip -d project/
+          
+          # 判断文件类型并解压
+          FILE_TYPE=$(file -b project.download)
+          if echo "$FILE_TYPE" | grep -qi "HTML"; then
+            echo "❌ 错误：下载到的是 HTML 网页，不是压缩包！请检查 URL 是否正确（GitHub 文件需加 ?raw=true）"
+            cat project.download
+            exit 1
+          elif echo "$FILE_TYPE" | grep -qi "Zip"; then
+            unzip -q project.download -d project/
+          elif echo "$FILE_TYPE" | grep -qi "gzip"; then
+            7z x project.download -oproject/
+          elif echo "$FILE_TYPE" | grep -qi "RAR"; then
+            7z x project.download -oproject/
+          else
+            echo "⚠️ 未知格式：$FILE_TYPE，尝试强制解压..."
+            7z x project.download -oproject/ || unzip -q project.download -d project/
+          fi
+
           # 查找 gradlew 的位置
           GRADLEW_PATH=$(find project -name "gradlew" | head -1)
           if [ -z "$GRADLEW_PATH" ]; then
@@ -100,3 +125,4 @@ jobs:
               -H "Content-Type: application/json" \
               -d "{\"status\":\"failed\",\"run_id\":\"${{ github.run_id }}\",\"logs\":\"未找到 APK 产物。日志：${LOGS}\"}"
           fi
+
