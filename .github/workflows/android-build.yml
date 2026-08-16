@@ -29,21 +29,20 @@ jobs:
       - name: 下载项目压缩包
         run: curl -L "${{ github.event.inputs.project_url }}" -o project.zip
 
-      - name: 解压项目
+      - name: 解压项目并定位 Gradle
         run: |
           mkdir -p project
-          unzip -q project.zip -d project/ || true
-          # 进入最深的包含 gradlew 的目录
-          while [ ! -f project/gradlew ] && [ "$(ls -1 project/ | wc -l)" -eq 1 ]; do
-            DIR=$(ls project/ | head -1)
-            if [ -d "project/$DIR" ]; then
-              mv project/$DIR/* project/
-              rmdir "project/$DIR"
-            else
-              break
-            fi
-          done
-          ls -la project/ | head -20
+          unzip -q project.zip -d project/
+          # 查找 gradlew 的位置
+          GRADLEW_PATH=$(find project -name "gradlew" | head -1)
+          if [ -z "$GRADLEW_PATH" ]; then
+            echo "❌ 未找到 gradlew，解压内容如下："
+            ls -R project
+            exit 1
+          fi
+          echo "✅ 找到 gradlew: $GRADLEW_PATH"
+          # 将 gradlew 所在目录设为环境变量
+          echo "GRADLEW_DIR=$(dirname $GRADLEW_PATH)" >> $GITHUB_ENV
 
       - name: 配置 JDK 17
         uses: actions/setup-java@v4
@@ -55,40 +54,49 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: 赋予 gradlew 权限
-        working-directory: ./project
-        run: chmod +x gradlew 2>/dev/null || true
+        working-directory: ${{ env.GRADLEW_DIR }}
+        run: |
+          if [ -f "gradlew" ]; then
+            chmod +x gradlew
+          else
+            echo "❌ gradlew 不存在"
+            exit 1
+          fi
 
       - name: 编译（Debug）
         if: ${{ github.event.inputs.build_type == 'debug' }}
-        working-directory: ./project
-        run: ./gradlew assembleDebug --no-daemon
+        working-directory: ${{ env.GRADLEW_DIR }}
+        run: ./gradlew assembleDebug --no-daemon | tee build.log
 
       - name: 编译（Release）
         if: ${{ github.event.inputs.build_type == 'release' }}
-        working-directory: ./project
-        run: ./gradlew assembleRelease --no-daemon
+        working-directory: ${{ env.GRADLEW_DIR }}
+        run: ./gradlew assembleRelease --no-daemon | tee build.log
 
       - name: 上传 APK 产物
         uses: actions/upload-artifact@v4
         with:
           name: app-${{ github.event.inputs.build_type }}
-          path: "**/*.apk"
+          path: ${{ env.GRADLEW_DIR }}/**/*.apk
           retention-days: 7
 
       - name: 回调通知
         if: ${{ github.event.inputs.callback_url != '' }}
         run: |
-          APK_PATH=$(find . -name "*.apk" | head -1)
+          APK_PATH=$(find ${{ env.GRADLEW_DIR }} -name "*.apk" | head -1)
+          BUILD_LOG="${{ env.GRADLEW_DIR }}/build.log"
+          LOGS=$(cat "$BUILD_LOG" 2>/dev/null || echo "无编译日志")
+
           if [ -f "$APK_PATH" ]; then
             curl -X POST "${{ github.event.inputs.callback_url }}" \
               -H "Authorization: Bearer ${{ github.event.inputs.supabase_anon_key }}" \
               -F "status=completed" \
               -F "run_id=${{ github.run_id }}" \
-              -F "logs=GitHub Actions 编译成功" \
+              -F "logs=$LOGS" \
               -F "file=@$APK_PATH"
           else
             curl -X POST "${{ github.event.inputs.callback_url }}" \
               -H "Authorization: Bearer ${{ github.event.inputs.supabase_anon_key }}" \
               -H "Content-Type: application/json" \
-              -d '{"status":"failed","run_id":"${{ github.run_id }}","logs":"未找到 APK 产物"}'
+              -d "{\"status\":\"failed\",\"run_id\":\"${{ github.run_id }}\",\"logs\":\"未找到 APK 产物。日志：${LOGS}\"}"
           fi
