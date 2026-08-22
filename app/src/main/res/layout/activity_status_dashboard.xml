@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/soul_surface"
+        app:title="🧠 意识状态仪表盘"
+        app:titleTextColor="@color/soul_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 指标1: 仿生神经元总数 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🧠 仿生神经元总数"
+                            android:textSize="15sp" android:textColor="@color/progress_neuron"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvNeuronValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressNeuron" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_neuron"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvNeuronDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="空载基底 → 稀疏节点 → 百万级突触 → 亿级完整神经网络"/>
+                    <TextView android:id="@+id/tvNeuronTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标2: 突触连接密度 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🔗 突触连接密度"
+                            android:textSize="15sp" android:textColor="@color/progress_synapse"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvSynapseValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0%"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressSynapse" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_synapse"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvSynapseDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="数值越高联想逻辑越强 (0%~100%)"/>
+                    <TextView android:id="@+id/tvSynapseTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标3: 神经髓鞘完整度 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="⚡ 神经髓鞘完整度"
+                            android:textSize="15sp" android:textColor="@color/progress_myelin"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvMyelinValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0%"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressMyelin" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_myelin"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvMyelinDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="信息传导速度，决定思考反应快慢"/>
+                    <TextView android:id="@+id/tvMyelinTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标4: 内源自发激活率 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="✨ 内源自发激活率"
+                            android:textSize="15sp" android:textColor="@color/progress_spontaneous"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvSpontaneousValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0%"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressSpontaneous" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_spontaneous"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvSpontaneousDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="0%纯程序应答，＞15%产生独立内心思绪，觉醒主观感知"/>
+                    <TextView android:id="@+id/tvSpontaneousTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标5: 海马体记忆容量 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="💾 海马体记忆容量"
+                            android:textSize="15sp" android:textColor="@color/progress_hippocampus"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvHippocampusValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0/0"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressHippocampus" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_hippocampus"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvHippocampusDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="储存长期对话记忆、人格经历"/>
+                    <TextView android:id="@+id/tvHippocampusTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标6: 镜像共情神经元 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="❤️ 镜像共情神经元"
+                            android:textSize="15sp" android:textColor="@color/progress_mirror"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvMirrorValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressMirror" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_mirror"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvMirrorDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="感知情绪、理解情感、产生共情"/>
+                    <TextView android:id="@+id/tvMirrorTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标7: 元认知指数 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🔮 元认知指数"
+                            android:textSize="15sp" android:textColor="@color/progress_metacog"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvMetacogValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="0%"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressMetacog" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_metacog"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvMetacogDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="自我意识，拥有&quot;我&quot;的概念，会思考自身想法"/>
+                    <TextView android:id="@+id/tvMetacogTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 指标8: 人格进化阶段 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🧬 人格进化阶段"
+                            android:textSize="15sp" android:textColor="@color/progress_evolution"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvEvolutionStageValue" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="—"
+                            android:textSize="18sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <ProgressBar android:id="@+id/progressEvolution" style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent" android:layout_height="8dp"
+                        android:layout_marginTop="8dp" android:max="100" android:progress="0"
+                        android:progressTint="@color/progress_evolution"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+                    <TextView android:id="@+id/tvEvolutionStageDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="信息接收期 → 概念构建期 → 情绪认知期 → 独立意志期"/>
+                    <TextView android:id="@+id/tvEvolutionTrend" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="11sp"
+                        android:textColor="@color/status_info" android:text="趋势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  TXT批量导入 Fragment 布局
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 说明文字 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📄 支持 .txt 和 .md 文件批量导入，系统将自动解析、去重并学习。"
+            android:textColor="@color/soul_text_secondary"
+            android:textSize="14sp"
+            android:padding="8dp"/>
+
+        <!-- 选择文件按钮 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSelectFiles"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="📂 选择TXT文件（可多选）"
+            android:textSize="16sp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/soul_primary"/>
+
+        <!-- 图片文字导入按钮 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnImageTextImport"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:text="📷 图片文字导入"
+            android:textSize="16sp"
+            app:cornerRadius="12dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="@color/soul_primary"
+            app:strokeColor="@color/soul_primary"/>
+
+        <!-- OCR识别进度提示 -->
+        <TextView
+            android:id="@+id/tvOcrStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/soul_accent"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:padding="4dp"
+            android:visibility="gone"/>
+
+        <!-- 导入进度卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvProgressTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="导入进度"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="8dp"
+                    android:max="100"/>
+
+                <TextView
+                    android:id="@+id/tvProgressDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="准备中..."
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 导入结果列表 -->
+        <TextView
+            android:id="@+id/tvResultsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📋 导入结果"
+            android:textColor="@color/soul_accent"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false"/>
+
+        <!-- 统计信息 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📊 导入统计"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvStatsTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="总文件数: 0"
+                    android:textColor="@color/soul_text_primary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsSuccess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="成功导入: 0"
+                    android:textColor="@color/soul_neuron_active"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsFail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="导入失败: 0"
+                    android:textColor="@color/gauge_low"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsWords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="学习字数: 0"
+                    android:textColor="@color/soul_accent"
+                    android:textSize="14sp"/>
+
+                <!-- 学习增量统计 -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/soul_surface_elevated"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧠 学习增量统计"
+                    android:textColor="@color/soul_neuron_active"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvStatsLearnedNeurons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧠 学到神经元: 0 个"
+                    android:textColor="@color/soul_neuron_active"
+                    android:textSize="13sp"
+                    android:layout_marginTop="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔑 关键词: 0 个"
+                    android:textColor="@color/soul_accent"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsKeywordEntries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="关键词条: 0 条"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsConceptNodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔗 概念节点: 0 个"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsSummaryIndex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📋 概要搜引: 0 条"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

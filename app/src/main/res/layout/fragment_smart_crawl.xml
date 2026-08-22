@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  智能爬取 Fragment 布局
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 说明卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🕷️ 智能爬取模式"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="输入一个起始URL，系统将自动发现页面中的所有链接，递归爬取整站内容。\n\n• 只抓取同域名下的页面\n• 遵守 robots.txt 规则\n• 可设置爬取深度限制"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 配置区 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="⚙️ 爬取配置"
+                    android:textColor="@color/soul_accent"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <!-- 起始URL -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:boxStrokeColor="@color/soul_primary"
+                    app:hintTextColor="@color/soul_primary"
+                    android:hint="起始URL"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etStartUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/soul_text_primary"
+                        android:textSize="14sp"
+                        android:inputType="textUri"
+                        android:singleLine="true"
+                        android:text="http://example.com/"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 深度设置 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        app:boxStrokeColor="@color/soul_primary"
+                        app:hintTextColor="@color/soul_primary"
+                        android:hint="最大深度（默认3）"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMaxDepth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/soul_text_primary"
+                            android:textSize="14sp"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:text="3"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:boxStrokeColor="@color/soul_primary"
+                        app:hintTextColor="@color/soul_primary"
+                        android:hint="最大页面数"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMaxPages"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/soul_text_primary"
+                            android:textSize="14sp"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:text="500"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!-- 开关选项 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="遵守 robots.txt"
+                        android:textColor="@color/soul_text_primary"
+                        android:textSize="14sp"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchRobots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="仅同域名"
+                        android:textColor="@color/soul_text_primary"
+                        android:textSize="14sp"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchSameDomain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
+                </LinearLayout>
+
+                <!-- robots.txt配置目录设置 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="📂 robots.txt 配置文件目录"
+                        android:textColor="@color/soul_text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="设置本地配置目录，用于存放自定义robots.txt规则文件"
+                        android:textColor="@color/soul_text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRobotsConfigDir"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="6dp"
+                        android:text="📁 选择配置目录"
+                        android:textSize="12sp"
+                        app:cornerRadius="10dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                    <TextView
+                        android:id="@+id/tvRobotsConfigDir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="配置目录: 未设置"
+                        android:textColor="@color/soul_text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 控制按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStartCrawl"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="▶ 开始爬取"
+                app:cornerRadius="12dp"
+                app:backgroundTint="@color/soul_primary"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPauseCrawl"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="⏸ 暂停"
+                android:enabled="false"
+                app:cornerRadius="12dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+        </LinearLayout>
+
+        <!-- 爬取进度卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCrawlProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvCrawlState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🕷️ 爬取状态: 空闲"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <ProgressBar
+                    android:id="@+id/crawlProgressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="8dp"
+                    android:max="100"/>
+
+                <TextView
+                    android:id="@+id/tvCurrentUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="当前: -"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:maxLines="1"
+                    android:ellipsize="middle"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvCrawlDiscovered"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="发现: 0"
+                        android:textColor="@color/soul_accent"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tvCrawlSuccess"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="成功: 0"
+                        android:textColor="@color/soul_neuron_active"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tvCrawlFailed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="失败: 0"
+                        android:textColor="@color/gauge_low"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tvCrawlBlocked"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="阻止: 0"
+                        android:textColor="@color/gauge_mid"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvCrawlDepth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="当前深度: 0"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

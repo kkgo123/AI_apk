@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  抓取进程列表项布局
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/soul_surface"
+    app:cardElevation="1dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- URL模板 -->
+        <TextView
+            android:id="@+id/tvProcessUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/soul_text_primary"
+            android:textSize="13sp"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            android:fontFamily="monospace"/>
+
+        <!-- 状态 -->
+        <TextView
+            android:id="@+id/tvProcessState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/soul_accent"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- 进度条 -->
+        <ProgressBar
+            android:id="@+id/processProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="6dp"
+            android:max="100"/>
+
+        <!-- 进度文字 -->
+        <TextView
+            android:id="@+id/tvProcessProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/soul_text_secondary"
+            android:textSize="11sp"
+            android:layout_marginTop="2dp"/>
+
+        <!-- 详细学习统计行 -->
+        <LinearLayout
+            android:id="@+id/layoutLearnStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="6dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvLearnedNeurons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🧠 已学到神经元: 0 个"
+                android:textColor="@color/soul_neuron_active"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:id="@+id/tvKeywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔑 关键词: 0 个"
+                android:textColor="@color/soul_accent"
+                android:textSize="11sp"
+                android:layout_marginTop="1dp"/>
+
+            <TextView
+                android:id="@+id/tvKeywordEntries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="关键词条: 0 条"
+                android:textColor="@color/soul_text_secondary"
+                android:textSize="11sp"
+                android:layout_marginTop="1dp"/>
+
+            <TextView
+                android:id="@+id/tvConceptNodes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔗 概念节点: 0 个"
+                android:textColor="@color/soul_primary"
+                android:textSize="11sp"
+                android:layout_marginTop="1dp"/>
+
+            <TextView
+                android:id="@+id/tvSummaryIndex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📋 概要搜引: 0 条"
+                android:textColor="@color/soul_text_secondary"
+                android:textSize="11sp"
+                android:layout_marginTop="1dp"/>
+        </LinearLayout>
+
+        <!-- 操作按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPauseProcess"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="⏸ 暂停"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:minWidth="70dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnResumeProcess"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="▶ 恢复"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:minWidth="70dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteProcess"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="🗑️ 删除"
+                android:textSize="12sp"
+                android:minWidth="70dp"
+                android:textColor="@color/gauge_low"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

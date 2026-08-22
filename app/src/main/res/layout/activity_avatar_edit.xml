@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/soul_surface"
+        app:title="🎭 化身编辑"
+        app:titleTextColor="@color/soul_primary"
+        app:navigationIcon="@android:drawable/ic_menu_revert"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/layoutButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 化身预览区域 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/avatar_preview_bg"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:orientation="vertical" android:gravity="center">
+                    <TextView
+                        android:id="@+id/tvAvatarPreview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🧑"
+                        android:textSize="64sp"/>
+                    <TextView
+                        android:id="@+id/tvAvatarDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="默认人形"
+                        android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:layout_marginTop="8dp"/>
+                    <TextView
+                        android:id="@+id/tvAvatarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="写实人形"
+                        android:textSize="12sp"
+                        android:textColor="@color/soul_text_secondary"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 身份提示 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔒 更换外观不变更GUID身份/人格/意识"
+                android:textSize="12sp"
+                android:textColor="@color/soul_accent"
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
+
+            <!-- 性别 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="性别" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+                <RadioButton android:id="@+id/rbMale" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="男"
+                    android:textColor="@color/soul_text_primary" android:layout_marginEnd="16dp"/>
+                <RadioButton android:id="@+id/rbFemale" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="女"
+                    android:textColor="@color/soul_text_primary" android:layout_marginEnd="16dp"/>
+                <RadioButton android:id="@+id/rbNone" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="无性别"
+                    android:textColor="@color/soul_text_primary" android:checked="true"/>
+            </RadioGroup>
+
+            <!-- 年龄外观 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="年龄外观" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <RadioGroup
+                android:id="@+id/rgAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+                <RadioButton android:id="@+id/rbYoung" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="少年"
+                    android:textColor="@color/soul_text_primary"/>
+                <RadioButton android:id="@+id/rbYouth" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="青年"
+                    android:textColor="@color/soul_text_primary" android:checked="true"
+                    android:layout_marginStart="8dp"/>
+                <RadioButton android:id="@+id/rbMiddle" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="中年"
+                    android:textColor="@color/soul_text_primary" android:layout_marginStart="8dp"/>
+                <RadioButton android:id="@+id/rbMature" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="成熟"
+                    android:textColor="@color/soul_text_primary" android:layout_marginStart="8dp"/>
+            </RadioGroup>
+
+            <!-- 外表风格 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="外表风格" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:singleSelection="true">
+                <com.google.android.material.chip.Chip android:id="@+id/chipCute"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="可爱卡通" style="@style/Widget.MaterialComponents.Chip.Choice"/>
+                <com.google.android.material.chip.Chip android:id="@+id/chipRealistic"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="写实人形" android:checked="true" style="@style/Widget.MaterialComponents.Chip.Choice"/>
+                <com.google.android.material.chip.Chip android:id="@+id/chipSciFi"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="科幻机械" style="@style/Widget.MaterialComponents.Chip.Choice"/>
+                <com.google.android.material.chip.Chip android:id="@+id/chipFantasy"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="奇幻精灵" style="@style/Widget.MaterialComponents.Chip.Choice"/>
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- 性格 (大五人格) -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="性格（大五人格）" android:textSize="14sp"
+                android:textColor="@color/soul_text_secondary" android:layout_marginTop="16dp"/>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="开放性" android:textSize="12sp" android:textColor="@color/soul_text_primary"
+                android:layout_marginTop="8dp"/>
+            <SeekBar android:id="@+id/seekOpenness" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:max="100" android:progress="50"
+                android:progressTint="@color/soul_primary"/>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="尽责性" android:textSize="12sp" android:textColor="@color/soul_text_primary"
+                android:layout_marginTop="4dp"/>
+            <SeekBar android:id="@+id/seekConscientiousness" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:max="100" android:progress="50"
+                android:progressTint="@color/soul_primary"/>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="外向性" android:textSize="12sp" android:textColor="@color/soul_text_primary"
+                android:layout_marginTop="4dp"/>
+            <SeekBar android:id="@+id/seekExtraversion" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:max="100" android:progress="50"
+                android:progressTint="@color/soul_primary"/>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="宜人性" android:textSize="12sp" android:textColor="@color/soul_text_primary"
+                android:layout_marginTop="4dp"/>
+            <SeekBar android:id="@+id/seekAgreeableness" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:max="100" android:progress="50"
+                android:progressTint="@color/soul_primary"/>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="神经质" android:textSize="12sp" android:textColor="@color/soul_text_primary"
+                android:layout_marginTop="4dp"/>
+            <SeekBar android:id="@+id/seekNeuroticism" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:max="100" android:progress="50"
+                android:progressTint="@color/soul_primary"/>
+
+            <!-- 服装 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="服装" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <Spinner android:id="@+id/spinnerOutfit"
+                android:layout_width="match_parent" android:layout_height="44dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/soul_surface"
+                android:popupBackground="@color/soul_surface"/>
+
+            <!-- 主色调 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="主色调" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp" android:gravity="center_vertical">
+                <View android:id="@+id/viewColorPreview"
+                    android:layout_width="40dp" android:layout_height="40dp"
+                    android:background="@color/soul_primary"/>
+                <SeekBar android:id="@+id/seekColorHue" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:max="360" android:progress="260" android:layout_marginStart="12dp"
+                    android:progressTint="@color/soul_primary"/>
+            </LinearLayout>
+
+            <!-- 发型 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="发型" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <EditText android:id="@+id/etHair" android:layout_width="match_parent"
+                android:layout_height="44dp" android:layout_marginTop="4dp"
+                android:background="@color/soul_surface"
+                android:hint="输入发型描述" android:textColorHint="@color/soul_text_secondary"
+                android:textColor="@color/soul_text_primary" android:textSize="14sp"
+                android:paddingHorizontal="12dp" android:inputType="text"/>
+
+            <!-- 瞳色 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="瞳色" android:textSize="14sp" android:textColor="@color/soul_text_secondary"
+                android:layout_marginTop="16dp"/>
+            <EditText android:id="@+id/etEyeColor" android:layout_width="match_parent"
+                android:layout_height="44dp" android:layout_marginTop="4dp"
+                android:background="@color/soul_surface"
+                android:hint="输入瞳色描述" android:textColorHint="@color/soul_text_secondary"
+                android:textColor="@color/soul_text_primary" android:textSize="14sp"
+                android:paddingHorizontal="12dp" android:inputType="text"/>
+
+            <!-- 自定义描述 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="自定义描述" android:textSize="14sp"
+                android:textColor="@color/soul_text_secondary" android:layout_marginTop="16dp"/>
+            <EditText android:id="@+id/etCustomDesc" android:layout_width="match_parent"
+                android:layout_height="88dp" android:layout_marginTop="4dp"
+                android:background="@color/soul_surface"
+                android:hint="描述你理想中的化身外观…"
+                android:textColorHint="@color/soul_text_secondary"
+                android:textColor="@color/soul_text_primary" android:textSize="14sp"
+                android:padding="12dp" android:gravity="top" android:inputType="textMultiLine"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 底部按钮 -->
+    <LinearLayout
+        android:id="@+id/layoutButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/soul_surface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="重置"
+            app:cornerRadius="12dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="保存"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

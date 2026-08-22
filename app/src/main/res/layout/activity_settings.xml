@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  activity_settings.xml - 设置页面布局（全面升级版）
+  
+  新增区域：
+  - 💬 对话设置（覆盖条数、思维扩散度、对话管理）
+  - 🌐 网页学习录入（文字/图片/视频/代码开关）
+  - 🎨 桌面精灵设置入口
+  - 🧬 自我进化面板入口
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/soul_surface"
+        app:title="⚙️ 设置"
+        app:titleTextColor="@color/soul_primary"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 全局开关（原有） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🔘 全局开关管理" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="多媒体总开关"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchMultiToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="学习引擎"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchLearningToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="外网抓取"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchWebToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="文件解析"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchFileParseToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="联网搜索"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchWebSearchToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="化身功能"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchAvatarToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="语音交互"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchVoiceToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="后台常驻"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchBgToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="逆向引擎"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchReverseToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="意识备份"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchBackupToggle" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 🔮 推理模式（新增） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🔮 推理模式" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="选择AI推理的计算方式，同一时间只能开启一种模式" android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary"/>
+
+                    <!-- 推理模式 Switch 开关组 -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" android:layout_marginTop="8dp">
+
+                        <!-- Switch 1: 纯本地推理模式 -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:orientation="horizontal" android:gravity="center_vertical"
+                            android:minHeight="48dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="📱 纯本地推理模式" android:textSize="13sp"
+                                    android:textColor="@color/soul_text_primary"/>
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="使用设备本地算力，无需网络连接" android:textSize="11sp"
+                                    android:textColor="@color/soul_text_secondary"
+                                    android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchLocalInference" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:checked="true"
+                                android:buttonTint="@color/soul_accent"/>
+                        </LinearLayout>
+
+                        <!-- Switch 2: 纯云推理模式 -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:orientation="horizontal" android:gravity="center_vertical"
+                            android:minHeight="48dp" android:layout_marginTop="4dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="☁️ 纯云推理模式" android:textSize="13sp"
+                                    android:textColor="@color/soul_text_primary"/>
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="通过外部云API地址进行推理" android:textSize="11sp"
+                                    android:textColor="@color/soul_text_secondary"
+                                    android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchCloudInference" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/soul_accent"/>
+                        </LinearLayout>
+
+                        <!-- Switch 3: 纯模型服务器推理 -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:orientation="horizontal" android:gravity="center_vertical"
+                            android:minHeight="48dp" android:layout_marginTop="4dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="🖥️ 纯模型服务器推理" android:textSize="13sp"
+                                    android:textColor="@color/soul_text_primary"/>
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="连接局域网或远程模型服务器进行推理" android:textSize="11sp"
+                                    android:textColor="@color/soul_text_secondary"
+                                    android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchModelServer" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/soul_accent"/>
+                        </LinearLayout>
+
+                        <!-- Switch 4: 外挂记忆库 + 模型服务器推理 -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:orientation="horizontal" android:gravity="center_vertical"
+                            android:minHeight="48dp" android:layout_marginTop="4dp">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                                android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="🧠 外挂记忆库 + 模型服务器推理" android:textSize="13sp"
+                                    android:textColor="@color/soul_text_primary"/>
+                                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                                    android:text="结合外部记忆库增强模型推理能力" android:textSize="11sp"
+                                    android:textColor="@color/soul_text_secondary"
+                                    android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchMemoryServer" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/soul_accent"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- 纯本地推理详情面板（llama.cpp server） -->
+                    <LinearLayout android:id="@+id/layoutLocalMode"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" android:visibility="visible"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/soul_background"
+                        android:padding="12dp">
+
+                        <!-- 说明文字 -->
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="在手机Termux或电脑上运行 llama.cpp server，填入地址即可。支持 localhost 和局域网IP。"
+                            android:textSize="11sp" android:textColor="@color/soul_text_secondary"
+                            android:lineSpacingExtra="3dp"/>
+
+                        <!-- 服务器地址输入 -->
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="服务器地址" android:textSize="12sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <EditText android:id="@+id/etLlamaServerUrl"
+                            android:layout_width="match_parent" android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="http://localhost:8080"
+                            android:textSize="13sp" android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_surface"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"
+                            android:inputType="textUri"
+                            android:singleLine="true"/>
+
+                        <!-- 连接状态显示 -->
+                        <TextView android:id="@+id/tvLlamaConnectionStatus"
+                            android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="连接状态: 未测试"
+                            android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                            android:lineSpacingExtra="3dp"/>
+
+                        <!-- 测试连接按钮 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTestLlamaConnection"
+                            android:layout_width="match_parent" android:layout_height="38dp"
+                            android:layout_marginTop="8dp"
+                            android:text="测试连接"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                        <!-- 分隔线 -->
+                        <View android:layout_width="match_parent" android:layout_height="1dp"
+                            android:layout_marginTop="12dp" android:layout_marginBottom="8dp"
+                            android:background="@color/soul_surface"/>
+
+                        <!-- 本地模型状态（保留原有功能） -->
+                        <TextView android:id="@+id/tvLocalModelStatus"
+                            android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="📱 本地模型状态: 就绪"
+                            android:textSize="12sp" android:textColor="@color/soul_text_primary"
+                            android:lineSpacingExtra="4dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCheckLocalModel"
+                            android:layout_width="match_parent" android:layout_height="38dp"
+                            android:layout_marginTop="8dp"
+                            android:text="检测本地模型"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                    </LinearLayout>
+
+                    <!-- 纯云推理（API模式）详情面板 -->
+                    <LinearLayout android:id="@+id/layoutApiMode"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" android:visibility="gone"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/soul_background"
+                        android:padding="12dp">
+
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="API地址" android:textSize="12sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <EditText android:id="@+id/etApiUrl"
+                            android:layout_width="match_parent" android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="http://192.168.1.100:5000"
+                            android:textSize="13sp" android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_surface"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"
+                            android:inputType="textUri"
+                            android:singleLine="true"/>
+
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="API Key" android:textSize="12sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginTop="12dp"/>
+                        <EditText android:id="@+id/etApiKey"
+                            android:layout_width="match_parent" android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="sk-xxxxxxxxxxxxxxxx"
+                            android:textSize="13sp" android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_surface"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"
+                            android:inputType="textPassword"
+                            android:singleLine="true"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSaveApiConfig"
+                            android:layout_width="match_parent" android:layout_height="38dp"
+                            android:layout_marginTop="12dp"
+                            android:text="保存API配置"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"/>
+                    </LinearLayout>
+
+                    <!-- 纯模型服务器推理详情面板 -->
+                    <LinearLayout android:id="@+id/layoutModelServerMode"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" android:visibility="gone"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/soul_background"
+                        android:padding="12dp">
+
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="模型服务器地址" android:textSize="12sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <EditText android:id="@+id/etModelServerUrl"
+                            android:layout_width="match_parent" android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="http://192.168.1.100:5000"
+                            android:textSize="13sp" android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_surface"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"
+                            android:inputType="textUri"
+                            android:singleLine="true"/>
+
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="模型名称（可选）" android:textSize="12sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginTop="12dp"/>
+                        <EditText android:id="@+id/etModelName"
+                            android:layout_width="match_parent" android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="留空使用默认模型"
+                            android:textSize="13sp" android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_surface"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"
+                            android:inputType="text"
+                            android:singleLine="true"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSaveModelServer"
+                            android:layout_width="match_parent" android:layout_height="38dp"
+                            android:layout_marginTop="12dp"
+                            android:text="保存模型服务器配置"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"/>
+                    </LinearLayout>
+
+                    <!-- 外挂记忆库详情面板 -->
+                    <LinearLayout android:id="@+id/layoutMemoryMode"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" android:visibility="gone"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/soul_background"
+                        android:padding="12dp">
+
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="记忆库路径" android:textSize="12sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <EditText android:id="@+id/etMemoryPath"
+                            android:layout_width="match_parent" android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:hint="/storage/emulated/0/MindSoul/memory"
+                            android:textSize="13sp" android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_surface"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"
+                            android:inputType="text"
+                            android:singleLine="true"/>
+
+                        <TextView android:id="@+id/tvMemoryConnectionStatus"
+                            android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="连接状态: 未连接"
+                            android:textSize="12sp" android:textColor="@color/soul_text_secondary"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTestMemoryConnection"
+                            android:layout_width="match_parent" android:layout_height="38dp"
+                            android:layout_marginTop="12dp"
+                            android:text="🔗 连接测试"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                    </LinearLayout>
+
+                    <!-- ═══════════════════════════════════════ -->
+                    <!-- 🏅 推理优先级设置 -->
+                    <!-- ═══════════════════════════════════════ -->
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:layout_marginTop="16dp" android:layout_marginBottom="8dp"
+                        android:background="@color/soul_background"/>
+
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="🏅 推理优先级设置" android:textSize="14sp"
+                        android:textColor="@color/soul_primary" android:textStyle="bold"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="设置各推理源的优先度（0-100），系统将按优先度选择推理路径"
+                        android:textSize="11sp" android:textColor="@color/soul_text_secondary"
+                        android:layout_marginTop="2dp" android:layout_marginBottom="8dp"/>
+
+                    <!-- 本地模型优先度 -->
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="📱 本地模型优先度" android:textSize="13sp"
+                        android:textColor="@color/soul_text_primary"/>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="4dp"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0" android:textSize="11sp" android:textColor="@color/soul_text_secondary"/>
+                        <SeekBar android:id="@+id/seekbarLocalModelPriority"
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="8dp"
+                            android:max="100"
+                            android:progress="80"
+                            android:progressTint="@color/soul_primary"
+                            android:thumbTint="@color/soul_accent"/>
+                        <TextView android:id="@+id/tvLocalModelPriorityValue"
+                            android:layout_width="36dp" android:layout_height="wrap_content"
+                            android:text="80" android:textSize="13sp"
+                            android:textColor="@color/soul_primary" android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- 外挂记忆库优先度 -->
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="🧠 外挂记忆库优先度" android:textSize="13sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:layout_marginTop="12dp"/>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="4dp"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0" android:textSize="11sp" android:textColor="@color/soul_text_secondary"/>
+                        <SeekBar android:id="@+id/seekbarMemoryPriority"
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="8dp"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressTint="@color/soul_primary"
+                            android:thumbTint="@color/soul_accent"/>
+                        <TextView android:id="@+id/tvMemoryPriorityValue"
+                            android:layout_width="36dp" android:layout_height="wrap_content"
+                            android:text="50" android:textSize="13sp"
+                            android:textColor="@color/soul_primary" android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- 模型服务器(API)优先度 -->
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="🖥️ 模型服务器(API)优先度" android:textSize="13sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:layout_marginTop="12dp"/>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="4dp"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0" android:textSize="11sp" android:textColor="@color/soul_text_secondary"/>
+                        <SeekBar android:id="@+id/seekbarApiPriority"
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="8dp"
+                            android:max="100"
+                            android:progress="60"
+                            android:progressTint="@color/soul_primary"
+                            android:thumbTint="@color/soul_accent"/>
+                        <TextView android:id="@+id/tvApiPriorityValue"
+                            android:layout_width="36dp" android:layout_height="wrap_content"
+                            android:text="60" android:textSize="13sp"
+                            android:textColor="@color/soul_primary" android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 💬 对话设置（新增） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="💬 对话设置" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+
+                    <!-- 对话自动覆盖条数 -->
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="对话自动覆盖条数" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary" android:textStyle="bold"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="超出后自动覆盖最早的对话记录" android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary" android:layout_marginTop="2dp"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="8dp"
+                        android:gravity="center_vertical">
+                        <EditText android:id="@+id/etCoverCount"
+                            android:layout_width="0dp" android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:hint="默认1000"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_background"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSaveCoverCount"
+                            android:layout_width="wrap_content" android:layout_height="40dp"
+                            android:layout_marginStart="8dp"
+                            android:text="保存"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"/>
+                    </LinearLayout>
+
+                    <!-- AI单次回复字符上限 -->
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="AI单次回复字符上限" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary" android:textStyle="bold"
+                        android:layout_marginTop="16dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="限制AI每次回复的最大字符数，超出自动截断" android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary" android:layout_marginTop="2dp"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="8dp"
+                        android:gravity="center_vertical">
+                        <EditText android:id="@+id/etMaxReplyChars"
+                            android:layout_width="0dp" android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:hint="默认2000"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_primary"
+                            android:background="@color/soul_background"
+                            android:paddingStart="12dp" android:paddingEnd="12dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text=" 字" android:textSize="13sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginHorizontal="4dp"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSaveMaxReplyChars"
+                            android:layout_width="wrap_content" android:layout_height="40dp"
+                            android:layout_marginStart="4dp"
+                            android:text="保存"
+                            android:textSize="12sp"
+                            app:cornerRadius="8dp"/>
+                    </LinearLayout>
+
+                    <!-- AI思维扩散度 -->
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="AI思维扩散度" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary" android:textStyle="bold"
+                        android:layout_marginTop="16dp"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="控制AI回答的创造性和发散程度" android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary" android:layout_marginTop="2dp"/>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="8dp"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="收敛" android:textSize="11sp" android:textColor="@color/soul_text_secondary"/>
+                        <SeekBar android:id="@+id/seekbarDivergence"
+                            android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="8dp"
+                            android:progress="50"
+                            android:progressTint="@color/soul_primary"
+                            android:thumbTint="@color/soul_accent"/>
+                        <TextView android:id="@+id/tvDivergenceValue"
+                            android:layout_width="36dp" android:layout_height="wrap_content"
+                            android:text="50" android:textSize="13sp"
+                            android:textColor="@color/soul_primary" android:textStyle="bold"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tvDivergenceDesc"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="均衡模式" android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary"
+                        android:gravity="center" android:layout_marginTop="2dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 🌐 网页学习录入（新增） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🌐 网页学习录入" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="控制从网页学习时录入哪些类型的内容" android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary"/>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical" android:layout_marginTop="8dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="📝 文字内容"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchLearnText" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🖼️ 图片内容"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchLearnImage" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🎬 视频内容"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchLearnVideo" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="48dp" android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="💻 网页代码"
+                            android:textSize="14sp" android:textColor="@color/soul_text_primary"/>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchLearnCode" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 🔐 权限等级（原有） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🔐 权限等级" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <TextView android:id="@+id/tvPermLevel" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="15sp"
+                        android:textColor="@color/soul_text_primary" android:textStyle="bold"
+                        android:text="当前: L1 默认沙箱"/>
+                    <TextView android:id="@+id/tvPermDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="仅自有目录读写，最安全默认状态"/>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:layout_marginTop="12dp">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPermL1" android:layout_width="0dp"
+                            android:layout_height="36dp" android:layout_weight="1"
+                            android:text="L1" android:textSize="11sp"
+                            app:cornerRadius="8dp" android:layout_marginEnd="4dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPermL2" android:layout_width="0dp"
+                            android:layout_height="36dp" android:layout_weight="1"
+                            android:text="L2" android:textSize="11sp"
+                            app:cornerRadius="8dp" android:layout_marginHorizontal="4dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPermL3A" android:layout_width="0dp"
+                            android:layout_height="36dp" android:layout_weight="1"
+                            android:text="L3-A" android:textSize="11sp"
+                            app:cornerRadius="8dp" android:layout_marginHorizontal="4dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPermL3B" android:layout_width="0dp"
+                            android:layout_height="36dp" android:layout_weight="1"
+                            android:text="L3-B" android:textSize="11sp"
+                            app:cornerRadius="8dp" android:layout_marginStart="4dp"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 🧠 心智模式（原有） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="🧠 心智模式" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <TextView android:id="@+id/tvMindMode" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="15sp"
+                        android:textColor="@color/soul_text_primary" android:textStyle="bold"
+                        android:text="当前: 仆从听命模式"/>
+                    <TextView android:id="@+id/tvMindModeDesc" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="人工指令优先，等待用户命令"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSwitchMode"
+                        android:layout_width="match_parent" android:layout_height="44dp"
+                        android:layout_marginTop="12dp"
+                        android:text="切换模式"
+                        app:cornerRadius="12dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- 📌 更多入口（原有 + 新增） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="📌 更多" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="4dp">
+
+                    <!-- 桌面精灵设置（新增） -->
+                    <TextView android:id="@+id/tvAvatarSettings"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="🎨 桌面精灵设置" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <!-- 对话管理（新增） -->
+                    <TextView android:id="@+id/tvChatManage"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="💬 对话管理" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <!-- 自我进化面板（新增） -->
+                    <TextView android:id="@+id/tvEvolutionPanel"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="🧬 自我进化面板" android:textSize="14sp"
+                        android:textColor="@color/progress_evolution"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <!-- 学习中心入口 -->
+                    <TextView android:id="@+id/tvLearningCenter"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="🧠 学习中心" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <!-- 导入全部意识和记忆 -->
+                    <TextView android:id="@+id/tvImportAll"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="📥 导入全部意识和记忆" android:textSize="14sp"
+                        android:textColor="@color/soul_neuron_active"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <!-- 导出全部意识和记忆 -->
+                    <TextView android:id="@+id/tvExportAll"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="📤 导出全部意识和记忆" android:textSize="14sp"
+                        android:textColor="@color/soul_accent"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <!-- 原有入口 -->
+                    <TextView android:id="@+id/tvImportExport"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="📦 导入导出管理" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <TextView android:id="@+id/tvPerception"
+                        android:layout_width="match_parent" android:layout_height="48dp"
+                        android:gravity="center_vertical" android:paddingHorizontal="12dp"
+                        android:text="🖐️ 五感状态" android:textSize="14sp"
+                        android:textColor="@color/soul_text_primary"
+                        android:background="?attr/selectableItemBackground"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- ℹ️ 关于（原有） -->
+            <!-- ═══════════════════════════════════════════ -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="ℹ️ 关于" android:textSize="16sp" android:textColor="@color/soul_accent"
+                android:textStyle="bold" android:layout_marginTop="24dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:layout_marginBottom="24dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:text="MindSoul AGI 人工生命" android:textSize="15sp"
+                        android:textColor="@color/soul_primary" android:textStyle="bold"
+                        android:gravity="center"/>
+                    <TextView android:id="@+id/tvAboutVersion" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:text="版本: v0.1.0-alpha" android:textSize="13sp"
+                        android:textColor="@color/soul_text_secondary" android:gravity="center"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="四层意识架构 · 七段式进化 · 仿生神经网络\n元认知引擎 · 五感感知 · 意识备份\n桌面精灵 · 自我进化 · 动态插件"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:gravity="center" android:lineSpacingExtra="2dp"/>
+        
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

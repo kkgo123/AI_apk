@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  activity_call.xml - 通话界面布局
+  ============================================================
+  包含两种模式：
+  1. 音频通话：全屏深色背景 + 化身波形动画 + 控制按钮
+  2. 视频通话：摄像头预览 + 叠加化身动画 + 控制按钮
+  新增：摄像头切换按钮（视频模式使用）
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/call_background"
+    android:keepScreenOn="true">
+
+    <!-- ============ 音频通话模式 ============ -->
+    <RelativeLayout
+        android:id="@+id/layoutAudioCall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <!-- 背景渐变圆光（模拟化身光环） -->
+        <View
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_centerInParent="true"
+            android:background="@color/call_avatar_glow" />
+
+        <!-- 化身波形动画 View -->
+        <View
+            android:id="@+id/viewWaveform"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            android:background="@color/call_waveform" />
+
+        <!-- AI 名称 -->
+        <TextView
+            android:id="@+id/tvAiName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/viewWaveform"
+            android:layout_marginBottom="32dp"
+            android:text="MindSoul"
+            android:textColor="@color/soul_text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- 通话状态 -->
+        <TextView
+            android:id="@+id/tvCallStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/viewWaveform"
+            android:layout_marginTop="32dp"
+            android:text="正在连接..."
+            android:textColor="@color/soul_text_secondary"
+            android:textSize="14sp" />
+
+        <!-- 通话时长 -->
+        <TextView
+            android:id="@+id/tvCallDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvCallStatus"
+            android:layout_marginTop="8dp"
+            android:text="00:00"
+            android:textColor="@color/soul_accent"
+            android:textSize="18sp"
+            android:fontFamily="monospace" />
+    </RelativeLayout>
+
+    <!-- ============ 视频通话模式 ============ -->
+    <FrameLayout
+        android:id="@+id/layoutVideoCall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <!-- 摄像头预览（使用 Camera2 + TextureView） -->
+        <TextureView
+            android:id="@+id/texturePreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- 叠加的化身小动画 -->
+        <View
+            android:id="@+id/viewVideoWaveform"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="16dp"
+            android:background="@color/call_waveform" />
+
+        <!-- AI 名称（视频模式） -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="16dp"
+            android:text="📹 视频通话"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="4" />
+    </FrameLayout>
+
+    <!-- ============ 底部控制栏（两种模式共用） ============ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingVertical="40dp"
+        android:background="#80000000">
+
+        <!-- 静音按钮 -->
+        <ImageButton
+            android:id="@+id/btnMute"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/call_button_bg"
+            android:src="@android:drawable/ic_btn_speak_now"
+            android:contentDescription="静音"
+            android:layout_marginEnd="16dp"
+            android:padding="14dp" />
+
+        <!-- 摄像头切换按钮（视频模式可见） -->
+        <ImageButton
+            android:id="@+id/btnSwitchCamera"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/call_button_bg"
+            android:src="@android:drawable/ic_menu_camera"
+            android:contentDescription="切换摄像头"
+            android:layout_marginEnd="16dp"
+            android:padding="14dp"
+            android:visibility="gone" />
+
+        <!-- 挂断按钮（红色大按钮） -->
+        <ImageButton
+            android:id="@+id/btnHangUp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="@drawable/call_hangup_bg"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="挂断"
+            android:padding="18dp" />
+
+        <!-- 扬声器切换按钮 -->
+        <ImageButton
+            android:id="@+id/btnSpeaker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/call_button_bg"
+            android:src="@android:drawable/ic_lock_silent_mode_off"
+            android:contentDescription="扬声器"
+            android:layout_marginStart="16dp"
+            android:padding="14dp" />
+    </LinearLayout>
+
+</FrameLayout>

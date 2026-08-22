@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  网址抓取 Fragment 布局 - 多进程管理
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/soul_background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 新建进程卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🔗 新建抓取进程"
+                        android:textColor="@color/soul_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="URL模板中使用 {var} 标记变动值部分\n支持: 纯数字(0→99999)、带前缀(a001→a999)、混合(page_001→page_999)、字母(aaa→zzz)"
+                        android:textColor="@color/soul_text_secondary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"/>
+
+                    <!-- URL模板输入 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:boxStrokeColor="@color/soul_primary"
+                        app:hintTextColor="@color/soul_primary"
+                        android:hint="URL模板（含{var}）"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etUrlTemplate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/soul_text_primary"
+                            android:textSize="14sp"
+                            android:inputType="textUri"
+                            android:singleLine="true"
+                            android:text="http://example.com/page/{var}.html"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 起始值 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            app:boxStrokeColor="@color/soul_primary"
+                            app:hintTextColor="@color/soul_primary"
+                            android:hint="起始值"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etStartValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/soul_text_primary"
+                                android:textSize="14sp"
+                                android:inputType="text"
+                                android:singleLine="true"
+                                android:text="1"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:boxStrokeColor="@color/soul_primary"
+                            app:hintTextColor="@color/soul_primary"
+                            android:hint="结束值"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etEndValue"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/soul_text_primary"
+                                android:textSize="14sp"
+                                android:inputType="text"
+                                android:singleLine="true"
+                                android:text="100"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- 模式识别提示 -->
+                    <TextView
+                        android:id="@+id/tvPatternHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/soul_accent"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"/>
+
+                    <!-- 创建并启动按钮 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCreateProcess"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:text="🚀 创建并启动"
+                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/soul_primary"/>
+
+                    <!-- 任务排队锁定提示 -->
+                    <TextView
+                        android:id="@+id/tvQueueLockHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="⏳ 抓取进行中，请等待当前任务完成后再创建新任务"
+                        android:textColor="@color/gauge_low"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 抓取间隔设置 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCrawlInterval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:id="@+id/layoutCrawlInterval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="⏱️ 抓取间隔设置"
+                        android:textColor="@color/soul_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="控制每次请求之间的间隔时间，避免被目标站点封禁"
+                        android:textColor="@color/soul_text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            app:boxStrokeColor="@color/soul_primary"
+                            app:hintTextColor="@color/soul_primary"
+                            android:hint="请求间隔(秒)"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etCrawlInterval"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/soul_text_primary"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:singleLine="true"
+                                android:text="2"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:boxStrokeColor="@color/soul_primary"
+                            app:hintTextColor="@color/soul_primary"
+                            android:hint="随机延迟(毫秒)"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etRandomDelay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/soul_text_primary"
+                                android:textSize="14sp"
+                                android:inputType="text"
+                                android:singleLine="true"
+                                android:text="10-400"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 进程列表标题 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="⚡ 抓取进程列表"
+                    android:textColor="@color/soul_accent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvRunningCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="运行中: 0/3"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <!-- 进程列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProcesses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- 空状态 -->
+            <TextView
+                android:id="@+id/tvEmptyProcesses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无抓取进程\n创建进程后在此显示"
+                android:textColor="@color/soul_text_secondary"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:padding="32dp"/>
+
+            <!-- 清理按钮 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnClearFinished"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:text="🧹 清理已完成的进程"
+                android:textSize="13sp"
+                android:visibility="gone"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <!-- ============ 后台运行与状态控制卡片（新增） ============ -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBackgroundControl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 标题行 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="⚙️ 后台爬取控制"
+                        android:textColor="@color/soul_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+
+                    <!-- 后台运行开关 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🔋 后台运行"
+                            android:textColor="@color/soul_text_primary"
+                            android:textSize="14sp"/>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchBackgroundMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="开启后息屏也能继续爬取，会显示通知栏进度"
+                        android:textColor="@color/soul_text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+
+                    <!-- 爬取状态指示 -->
+                    <TextView
+                        android:id="@+id/tvCrawlStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="⏹ 空闲"
+                        android:textColor="@color/soul_text_secondary"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        android:padding="8dp"
+                        android:background="@color/soul_surface_elevated"/>
+
+                    <!-- 暂停/恢复按钮 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPauseCrawl"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:text="⏸ 全部暂停"
+                            android:textSize="13sp"
+                            android:visibility="gone"
+                            app:cornerRadius="10dp"
+                            app:backgroundTint="@color/soul_accent"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnResumeCrawl"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:text="▶ 全部恢复"
+                            android:textSize="13sp"
+                            android:visibility="gone"
+                            app:cornerRadius="10dp"
+                            app:backgroundTint="@color/soul_neuron_active"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

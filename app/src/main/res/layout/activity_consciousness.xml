@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/soul_surface"
+        app:title="@string/consciousness_title"
+        app:titleTextColor="@color/soul_primary"
+        app:navigationIcon="@drawable/abc_ic_ab_back_material"
+        app:navigationIconTint="@color/soul_text_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ============================================= -->
+            <!-- 区域A: 意识统计显示区 -->
+            <!-- ============================================= -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📊 意识统计"
+                        android:textSize="16sp"
+                        android:textColor="@color/soul_primary"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp"/>
+
+                    <!-- 神经元数量 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="🧠"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_neuron_count"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvNeuronCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/soul_neuron_active"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 基本常识条数 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="📖"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_commonsense_count"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvCommonSenseCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/soul_accent"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 永久记忆条数 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="💾"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_permanent_memory"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvPermanentMemoryCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/progress_hippocampus"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 关键词条数 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="🔑"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_keyword_count"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvKeywordCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/status_warning"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 关键词条数量 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="📝"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_keyword_entry_count"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvKeywordEntryCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/status_info"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 概念节点数量 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="🔮"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_concept_node_count"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvConceptNodeCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/progress_mirror"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 概要搜引数量 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="🗂️"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_summary_index_count"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvSummaryIndexCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/progress_spontaneous"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 因果三元组数量 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="⚡"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_causal_triple"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvCausalTripleCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="15sp"
+                            android:textColor="@color/progress_synapse"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 公理索引层使用率 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="📐"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_axiom_usage"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvAxiomUsagePercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0%"
+                            android:textSize="15sp"
+                            android:textColor="@color/progress_metacog"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 意识活跃度 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="6dp">
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:text="✨"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/metric_consciousness_activity"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvConsciousnessActivity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0%"
+                            android:textSize="15sp"
+                            android:textColor="@color/soul_neuron_active"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ============================================= -->
+            <!-- 区域B: 自我进化提案区 -->
+            <!-- ============================================= -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consciousness_evolution_proposals"
+                        android:textSize="16sp"
+                        android:textColor="@color/soul_primary"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"/>
+
+                    <!-- 当前进化阶段 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前阶段:"
+                            android:textSize="13sp"
+                            android:textColor="@color/soul_text_secondary"/>
+                        <TextView
+                            android:id="@+id/tvEvolutionStage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="— —"
+                            android:textSize="14sp"
+                            android:textColor="@color/progress_evolution"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- 进化进度条 -->
+                    <ProgressBar
+                        android:id="@+id/progressEvolution"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:layout_marginBottom="4dp"
+                        android:progressTint="@color/progress_evolution"
+                        android:progressBackgroundTint="@color/gauge_bg"/>
+
+                    <TextView
+                        android:id="@+id/tvEvolutionProgressLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp"
+                        android:textColor="@color/soul_text_secondary"
+                        android:text="进化进度: 0%"
+                        android:layout_marginBottom="12dp"/>
+
+                    <!-- 提案列表 -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerProposals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_marginBottom="12dp"/>
+
+                    <!-- 空状态提示 -->
+                    <TextView
+                        android:id="@+id/tvEmptyProposals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="暂无可用提案，点击下方按钮生成"
+                        android:textSize="13sp"
+                        android:textColor="@color/soul_text_secondary"
+                        android:gravity="center"
+                        android:paddingVertical="16dp"
+                        android:layout_marginBottom="8dp"/>
+
+                    <!-- 生成新提案按钮 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGenerateProposal"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="@string/btn_generate_proposal"
+                        android:textColor="@color/soul_text_primary"
+                        android:textSize="14sp"
+                        app:backgroundTint="@color/soul_primary_dark"
+                        app:cornerRadius="12dp"
+                        app:icon="@android:drawable/ic_menu_add"
+                        app:iconTint="@color/soul_text_primary"
+                        app:iconGravity="start"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ============================================= -->
+            <!-- 区域C: 意识导入导出区 -->
+            <!-- ============================================= -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consciousness_import_export"
+                        android:textSize="16sp"
+                        android:textColor="@color/soul_primary"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="14dp"/>
+
+                    <!-- 2x2 网格按钮 -->
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:rowCount="2"
+                        android:useDefaultMargins="true">
+
+                        <!-- 导出意识 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExportConsciousness"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_columnWeight="1"
+                            android:text="@string/btn_export_consciousness"
+                            android:textSize="12sp"
+                            android:textColor="@color/soul_text_primary"
+                            app:backgroundTint="@color/soul_surface_elevated"
+                            app:cornerRadius="12dp"
+                            app:iconTint="@color/soul_accent"
+                            app:iconGravity="top"/>
+
+                        <!-- 导入意识 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnImportConsciousness"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_columnWeight="1"
+                            android:text="@string/btn_import_consciousness"
+                            android:textSize="12sp"
+                            android:textColor="@color/soul_text_primary"
+                            app:backgroundTint="@color/soul_surface_elevated"
+                            app:cornerRadius="12dp"
+                            app:iconTint="@color/status_info"
+                            app:iconGravity="top"/>
+
+                        <!-- 导出记忆 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExportMemory"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_columnWeight="1"
+                            android:text="@string/btn_export_memory"
+                            android:textSize="12sp"
+                            android:textColor="@color/soul_text_primary"
+                            app:backgroundTint="@color/soul_surface_elevated"
+                            app:cornerRadius="12dp"
+                            app:iconTint="@color/progress_hippocampus"
+                            app:iconGravity="top"/>
+
+                        <!-- 导入记忆 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnImportMemory"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_columnWeight="1"
+                            android:text="@string/btn_import_memory"
+                            android:textSize="12sp"
+                            android:textColor="@color/soul_text_primary"
+                            app:backgroundTint="@color/soul_surface_elevated"
+                            app:cornerRadius="12dp"
+                            app:iconTint="@color/status_warning"
+                            app:iconGravity="top"/>
+
+                    </GridLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  activity_floating_settings.xml - 精灵设置页面布局（全面升级版 v2.0）
+  ============================================================
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1A2E"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- ════ 标题区 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧿"
+                android:textSize="32sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="桌面精灵设置"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="系统桌面常驻 · 全面自定义"
+                    android:textColor="#8888AA"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ════ 权限状态 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="权限状态"
+                android:textColor="#AAAACC"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPermissionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="检查中..."
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnGrantPermission"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="前往开启权限"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:backgroundTint="#4A90D9"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- ════ 总开关 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="✨ 启用桌面精灵"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" />
+        </LinearLayout>
+
+        <!-- ════ 性别选择 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👤 性别"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbMale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="♂ 男"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbFemale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="♀ 女"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbNone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="⚪ 无性别"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9"
+                        android:checked="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <RadioButton
+                        android:id="@+id/rbIntersexMale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="⚧♂ 双性男"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbIntersexFemale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="⚧♀ 双性女"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+                </LinearLayout>
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- ════ 年龄外观 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎂 年龄外观"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="影响精灵大小和头身比"
+                android:textColor="#888899"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <RadioGroup
+                android:id="@+id/rgAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbChild"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="儿童"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbTeen"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="少年"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbYoungAdult"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="青年"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9"
+                        android:checked="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <RadioButton
+                        android:id="@+id/rbMiddleAge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="中年"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbMature"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="成熟"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbElder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="老年"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+                </LinearLayout>
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- ════ 动画风格 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎨 动画风格"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgAnimStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/rbAnim3D"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🌟 3D立体"
+                    android:textColor="#CCCCCC"
+                    android:buttonTint="#4A90D9"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rbAnim2D"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="📐 2D扁平"
+                    android:textColor="#CCCCCC"
+                    android:buttonTint="#4A90D9" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- ════ 表情切换预览 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="😊 表情切换预览"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvCurrentExpression"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前表情: 😌 平静"
+                android:textColor="#4A90D9"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:id="@+id/llExpressionContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- ════ 服装选择 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👔 服装选择"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgCostume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbSchoolUniform"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🎒 校服"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbSuit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="👔 西装"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rbSportswear"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🏋️ 运动装"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <RadioButton
+                        android:id="@+id/rbHanfu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="👘 汉服"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbMecha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🤖 机甲"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+
+                    <RadioButton
+                        android:id="@+id/rbFantasyRobe"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🧙 法袍"
+                        android:textColor="#CCCCCC"
+                        android:buttonTint="#4A90D9" />
+                </LinearLayout>
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- ════ 自定义外观上传 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📷 自定义外观"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvCustomStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无自定义外观"
+                android:textColor="#888899"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnUploadImage"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="📷 上传图片"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:backgroundTint="#4A90D9"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnUploadVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="🎬 上传视频"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:backgroundTint="#6C5CE7"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnClearCustom"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="🗑️ 清除"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:backgroundTint="#E74C3C" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ════ 装备系统 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎒 装备管理"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="为精灵添加多件装备（图片+用途描述）"
+                android:textColor="#888899"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tvEquipmentEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无装备（点击下方按钮添加）"
+                android:textColor="#888899"
+                android:textSize="13sp"
+                android:layout_marginTop="8dp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/llEquipmentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnAddEquipment"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="➕ 添加装备"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:backgroundTint="#4A90D9"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- ════ 3D模型上传 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎮 3D模型"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv3DModelStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未加载3D模型（支持 .glb / .obj 文件）"
+                android:textColor="#888899"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnUpload3DModel"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="🎮 上传3D模型"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:backgroundTint="#6C5CE7"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnClear3DModel"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="🗑️ 清除"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:backgroundTint="#E74C3C" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ════ 文生精灵 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✨ 文生精灵"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="输入描述，自动匹配精灵外观配置"
+                android:textColor="#888899"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <EditText
+                android:id="@+id/etTextToSpirit"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:hint="例如：活泼可爱的少年，穿着汉服，性格温柔..."
+                android:textColorHint="#666688"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:background="@drawable/setting_card_bg"
+                android:padding="12dp"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnGenerateSpirit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="✨ 生成精灵"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:backgroundTint="#6C5CE7"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvTextToSpiritResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#4A90D9"
+                android:textSize="13sp"
+                android:layout_marginTop="8dp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <!-- ════ 大小设置 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📏 悬浮窗大小"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/rgSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/rbSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="小"
+                    android:textColor="#CCCCCC"
+                    android:buttonTint="#4A90D9" />
+
+                <RadioButton
+                    android:id="@+id/rbMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="中"
+                    android:textColor="#CCCCCC"
+                    android:buttonTint="#4A90D9"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rbLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="大"
+                    android:textColor="#CCCCCC"
+                    android:buttonTint="#4A90D9" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- ════ 透明度 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="透明度"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvAlphaValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="90%"
+                    android:textColor="#4A90D9"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekbarAlpha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="80"
+                android:progressTint="#4A90D9"
+                android:thumbTint="#4A90D9"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- ════ 功能开关 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="功能选项"
+                android:textColor="#AAAACC"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💭 内心想法气泡"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI偶尔展示内心独白"
+                        android:textColor="#888899"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchBubble"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎮 全屏应用自动避让"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="游戏/视频时自动隐藏"
+                        android:textColor="#888899"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchAutoHide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚀 开机自启动"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="设备重启后自动恢复精灵"
+                        android:textColor="#888899"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchBootStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ════ 悬浮窗自定义尺寸(px) ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📐 自定义尺寸（像素）"
+                android:textColor="#AAAACC"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="留空则使用上方档位大小，填入数值则使用自定义像素尺寸"
+                android:textColor="#8888AA"
+                android:textSize="11sp"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="宽度 (px)"
+                        android:textColor="#CCCCEE"
+                        android:textSize="12sp" />
+                    <EditText
+                        android:id="@+id/etFloatingWidth"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:hint="如 200"
+                        android:inputType="number"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#555577"
+                        android:textSize="14sp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:background="@drawable/setting_card_bg" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="高度 (px)"
+                        android:textColor="#CCCCEE"
+                        android:textSize="12sp" />
+                    <EditText
+                        android:id="@+id/etFloatingHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:hint="如 200"
+                        android:inputType="number"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#555577"
+                        android:textSize="14sp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:background="@drawable/setting_card_bg" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnApplySize"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="应用尺寸"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="#4A90D9"
+                app:cornerRadius="10dp"
+                android:layout_marginTop="12dp" />
+        </LinearLayout>
+
+        <!-- ════ 操作说明 ════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/setting_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="操作指南"
+                android:textColor="#AAAACC"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="☝️ 单击 → 弹出想法气泡\n👆👆 双击 → 语音对话\n👇 长按 → 快捷菜单\n✋ 拖动 → 移动精灵位置"
+                android:textColor="#CCCCEE"
+                android:textSize="14sp"
+                android:lineSpacingExtra="6dp" />
+        </LinearLayout>
+
+        <!-- ════ 底部信息 ════ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MindSoul AGI · 桌面精灵系统 v2.0"
+            android:textColor="#555577"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+</ScrollView>

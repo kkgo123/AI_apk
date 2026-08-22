@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  item_chat_message.xml - 聊天消息项布局（升级版）
+  ============================================================
+  支持多种消息类型的展示：
+  1. 文本消息 - 纯文字气泡
+  2. 图片消息 - 缩略图 + 点击查看大图
+  3. 文件消息 - 文件名 + 大小 + 类型图标
+  4. 语音消息 - 波形图 + 时长
+  5. 视频消息 - 缩略图 + 播放按钮
+  6. 系统消息 - 居中灰色小字
+  7. 链接消息 - URL 预览
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="4dp">
+
+    <!-- ============ 系统消息（居中显示） ============ -->
+    <TextView
+        android:id="@+id/tvSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/soul_surface_light"
+        android:textColor="@color/soul_text_secondary"
+        android:textSize="11sp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"
+        android:visibility="gone" />
+
+    <!-- ============ AI消息（左侧） ============ -->
+    <LinearLayout
+        android:id="@+id/layoutAi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal"
+        android:maxWidth="340dp"
+        android:layout_marginEnd="60dp"
+        android:visibility="gone">
+
+        <!-- 消息内容（纵向） -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <!-- AI 文本气泡 -->
+        <TextView
+            android:id="@+id/tvAiText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/chat_bubble_ai"
+            android:textColor="@color/chat_text_ai"
+            android:textSize="14sp"
+            android:padding="12dp"
+            android:lineSpacingExtra="2dp" />
+
+        <!-- AI 图片消息 -->
+        <ImageView
+            android:id="@+id/ivAiImage"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:background="@drawable/bubble_image_bg"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="AI发送的图片" />
+
+        <!-- AI 文件卡片 -->
+        <LinearLayout
+            android:id="@+id/layoutAiFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/file_card_bg"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:minWidth="200dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvAiFileIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:gravity="center"
+                android:text="📄"
+                android:textSize="22sp"
+                android:background="@color/soul_surface_light" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/tvAiFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/soul_text_primary"
+                    android:textSize="13sp"
+                    android:maxLines="1"
+                    android:ellipsize="middle" />
+
+                <TextView
+                    android:id="@+id/tvAiFileSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- AI 语音消息 -->
+        <LinearLayout
+            android:id="@+id/layoutAiVoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/voice_wave_bg"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp"
+            android:minWidth="120dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvAiVoicePlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶"
+                android:textColor="@color/soul_primary"
+                android:textSize="16sp" />
+
+            <!-- 波形占位 -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="8dp"
+                android:background="@color/soul_primary"
+                android:alpha="0.3" />
+
+            <TextView
+                android:id="@+id/tvAiVoiceDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/soul_text_secondary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- AI 视频消息 -->
+        <FrameLayout
+            android:id="@+id/layoutAiVideo"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:background="@drawable/bubble_image_bg"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivAiVideoThumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="视频缩略图" />
+
+            <!-- 播放按钮叠加 -->
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@color/soul_surface_elevated"
+                android:gravity="center"
+                android:text="▶"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <!-- AI 时间戳 -->
+        <TextView
+            android:id="@+id/tvAiTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/soul_text_secondary"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="4dp" />
+
+        </LinearLayout><!-- 消息内容结束 -->
+
+        <!-- AI 消息操作按钮 -->
+        <TextView
+            android:id="@+id/btnAiOptions"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:gravity="center"
+            android:text="⋮"
+            android:textSize="14sp"
+            android:textColor="@color/soul_text_secondary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="top"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- ============ 用户消息（右侧） ============ -->
+    <LinearLayout
+        android:id="@+id/layoutUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        android:maxWidth="340dp"
+        android:layout_marginStart="60dp"
+        android:visibility="gone">
+
+        <!-- 用户消息操作按钮 -->
+        <TextView
+            android:id="@+id/btnUserOptions"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:gravity="center"
+            android:text="⋮"
+            android:textSize="14sp"
+            android:textColor="@color/soul_text_secondary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="top"
+            android:visibility="gone" />
+
+        <!-- 消息内容（纵向） -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <!-- 用户文本气泡 -->
+        <TextView
+            android:id="@+id/tvUserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/chat_bubble_user"
+            android:textColor="@color/chat_text_user"
+            android:textSize="14sp"
+            android:padding="12dp"
+            android:lineSpacingExtra="2dp" />
+
+        <!-- 用户图片消息 -->
+        <ImageView
+            android:id="@+id/ivUserImage"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:background="@drawable/bubble_image_bg"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:layout_gravity="end"
+            android:contentDescription="用户发送的图片" />
+
+        <!-- 用户文件卡片 -->
+        <LinearLayout
+            android:id="@+id/layoutUserFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/file_card_bg"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:minWidth="200dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvUserFileIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:gravity="center"
+                android:text="📄"
+                android:textSize="22sp"
+                android:background="@color/soul_surface_light" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:id="@+id/tvUserFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/soul_text_primary"
+                    android:textSize="13sp"
+                    android:maxLines="1"
+                    android:ellipsize="middle" />
+
+                <TextView
+                    android:id="@+id/tvUserFileSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 用户语音消息 -->
+        <LinearLayout
+            android:id="@+id/layoutUserVoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/voice_wave_bg"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp"
+            android:minWidth="120dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvUserVoicePlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶"
+                android:textColor="@color/chat_text_user"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="8dp"
+                android:background="@color/chat_text_user"
+                android:alpha="0.3" />
+
+            <TextView
+                android:id="@+id/tvUserVoiceDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/soul_text_secondary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 用户视频消息 -->
+        <FrameLayout
+            android:id="@+id/layoutUserVideo"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            android:background="@drawable/bubble_image_bg"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivUserVideoThumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="视频缩略图" />
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@color/soul_surface_elevated"
+                android:gravity="center"
+                android:text="▶"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <!-- 用户时间戳 -->
+        <TextView
+            android:id="@+id/tvUserTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/soul_text_secondary"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="4dp" />
+
+        </LinearLayout><!-- 消息内容结束 -->
+    </LinearLayout>
+
+</FrameLayout>

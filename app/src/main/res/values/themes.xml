@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MindSoul" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/soul_primary</item>
+        <item name="colorPrimaryDark">@color/soul_primary_dark</item>
+        <item name="colorAccent">@color/soul_accent</item>
+        <item name="android:windowBackground">@color/soul_background</item>
+        <item name="android:statusBarColor">@color/soul_background</item>
+        <item name="android:navigationBarColor">@color/soul_background</item>
+    </style>
+</resources>

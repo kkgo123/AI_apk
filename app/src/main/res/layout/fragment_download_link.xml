@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  下载链接学习 Fragment 布局
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 说明卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📥 下载链接学习"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="输入文件下载链接，系统将自动下载并进行学习。\n\n• 支持 .txt / .html / .md / .csv / .json 等文本文件\n• 大文件分块下载（每次1MB）\n• 单文件最大500MB，超时5分钟"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- URL输入与操作区 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔗 下载链接"
+                    android:textColor="@color/soul_accent"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <!-- URL输入框 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:boxStrokeColor="@color/soul_primary"
+                    app:hintTextColor="@color/soul_primary"
+                    android:hint="输入文件下载URL"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDownloadUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/soul_text_primary"
+                        android:textSize="14sp"
+                        android:inputType="textUri"
+                        android:singleLine="true"
+                        android:text=""/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 按钮区 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStartDownload"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="📥 开始下载学习"
+                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/soul_primary"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancelDownload"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="✖ 取消"
+                        android:enabled="false"
+                        app:cornerRadius="12dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 下载进度卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDownloadProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvDownloadState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📥 下载状态: 准备中"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <ProgressBar
+                    android:id="@+id/downloadProgressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="8dp"
+                    android:max="100"/>
+
+                <TextView
+                    android:id="@+id/tvDownloadDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="等待开始..."
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- 下载速度信息 -->
+                <TextView
+                    android:id="@+id/tvDownloadSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/soul_accent"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 学习结果统计卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLearnStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="@color/soul_surface"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧠 学习统计结果"
+                    android:textColor="@color/soul_neuron_active"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvStatsNeurons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧠 神经元数量: 0 个"
+                    android:textColor="@color/soul_neuron_active"
+                    android:textSize="13sp"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔑 关键词数量: 0 个"
+                    android:textColor="@color/soul_accent"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsKeywordEntries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="关键词条: 0 条"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsConceptNodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔗 概念节点数量: 0 个"
+                    android:textColor="@color/soul_primary"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tvStatsSummaryIndex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📋 概要搜引数量: 0 条"
+                    android:textColor="@color/soul_text_secondary"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

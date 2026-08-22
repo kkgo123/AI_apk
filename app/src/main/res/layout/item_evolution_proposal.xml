@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/soul_surface_light"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/soul_surface_elevated"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- 提案名称 + 类型标签 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvProposalName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="提案名称"
+                android:textSize="14sp"
+                android:textColor="@color/soul_text_primary"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvProposalType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:text="UI"
+                android:textSize="11sp"
+                android:textColor="@color/soul_text_primary"
+                android:background="@color/soul_primary_dark"/>
+
+        </LinearLayout>
+
+        <!-- 提案描述 -->
+        <TextView
+            android:id="@+id/tvProposalDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="提案描述内容"
+            android:textSize="12sp"
+            android:textColor="@color/soul_text_secondary"
+            android:maxLines="3"
+            android:ellipsize="end"/>
+
+        <!-- 预计影响 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/proposal_impact_label"
+                android:textSize="11sp"
+                android:textColor="@color/soul_text_secondary"/>
+            <TextView
+                android:id="@+id/tvProposalImpact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textSize="11sp"
+                android:textColor="@color/progress_evolution"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- 执行按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSkipProposal"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="⏭ 跳过"
+                android:textSize="11sp"
+                android:visibility="gone"
+                android:minWidth="60dp"
+                android:layout_marginEnd="4dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRejectProposal"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="✗ 拒绝"
+                android:textSize="11sp"
+                android:visibility="gone"
+                android:minWidth="60dp"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/gauge_low"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExecuteProposal"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="@string/btn_execute_proposal"
+                android:textSize="12sp"
+                android:textColor="@color/soul_text_primary"
+                app:backgroundTint="@color/soul_accent"
+                app:cornerRadius="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

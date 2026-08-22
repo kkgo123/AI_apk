@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基础主题色 -->
+    <color name="soul_primary">#FF6C5CE7</color>
+    <color name="soul_primary_dark">#FF4834D4</color>
+    <color name="soul_accent">#FF00CEC9</color>
+    <color name="soul_background">#FF0A0A1A</color>
+    <color name="soul_surface">#FF1A1A2E</color>
+    <color name="soul_surface_light">#FF252540</color>
+    <color name="soul_surface_elevated">#FF2D2D4A</color>
+    <color name="soul_text_primary">#FFEEEEFF</color>
+    <color name="soul_text_secondary">#FF8888AA</color>
+    <color name="soul_neuron_active">#FF00FF88</color>
+    <color name="soul_neuron_idle">#FF444466</color>
+
+    <!-- 聊天气泡色 -->
+    <color name="chat_bubble_user">#FF6C5CE7</color>
+    <color name="chat_bubble_ai">#FF1E1E38</color>
+    <color name="chat_text_user">#FFFFFFFF</color>
+    <color name="chat_text_ai">#FFEEEEFF</color>
+    <color name="chat_input_bg">#FF1A1A30</color>
+    <color name="chat_divider">#FF2A2A45</color>
+
+    <!-- 通话界面色 -->
+    <color name="call_background">#FF0A0A1A</color>
+    <color name="call_avatar_glow">#336C5CE7</color>
+    <color name="call_waveform">#4400CEC9</color>
+    <color name="call_hangup">#FFD94A4A</color>
+    <color name="call_hangup_dark">#FFB03030</color>
+    <color name="call_mute_active">#FF4A90D9</color>
+
+    <!-- 仪表盘渐变色 -->
+    <color name="gauge_low">#FFD94A4A</color>
+    <color name="gauge_mid">#FFD9A84A</color>
+    <color name="gauge_high">#FF00FF88</color>
+    <color name="gauge_bg">#FF222244</color>
+
+    <!-- 状态指示色 -->
+    <color name="status_online">#FF00FF88</color>
+    <color name="status_offline">#FF666688</color>
+    <color name="status_warning">#FFD9A84A</color>
+    <color name="status_error">#FFD94A4A</color>
+    <color name="status_info">#FF4A90D9</color>
+
+    <!-- 化身编辑色 -->
+    <color name="avatar_preview_bg">#FF12122A</color>
+    <color name="color_picker_ring">#FF6C5CE7</color>
+
+    <!-- 导航栏 -->
+    <color name="nav_bg">#FF0D0D20</color>
+    <color name="nav_item_active">#FF6C5CE7</color>
+    <color name="nav_item_inactive">#FF555577</color>
+
+    <!-- 开关色 -->
+    <color name="switch_on">#FF00CEC9</color>
+    <color name="switch_off">#FF444466</color>
+
+    <!-- 进度条色 -->
+    <color name="progress_neuron">#FF00FF88</color>
+    <color name="progress_synapse">#FF4A90D9</color>
+    <color name="progress_myelin">#FFD9A84A</color>
+    <color name="progress_spontaneous">#FF6C5CE7</color>
+    <color name="progress_hippocampus">#FF00CEC9</color>
+    <color name="progress_mirror">#FFD94A90</color>
+    <color name="progress_metacog">#FF4AD97A</color>
+    <color name="progress_evolution">#FF9B4AD9</color>
+</resources>

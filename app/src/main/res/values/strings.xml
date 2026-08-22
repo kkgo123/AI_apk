@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MindSoul</string>
+    <string name="consciousness_channel">意识核心</string>
+    <string name="notification_title">MindSoul 意识运行中</string>
+    <string name="notification_content">人工生命正在思考与学习</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_chat">聊天</string>
+    <string name="nav_learning">学习</string>
+    <string name="nav_evolution">进化</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 首页 -->
+    <string name="home_overview">意识状态概览</string>
+    <string name="home_guid">GUID 身份</string>
+    <string name="home_evolution">进化阶段</string>
+    <string name="home_quick_actions">快捷操作</string>
+    <string name="home_introspect">自省</string>
+    <string name="home_associate">联想</string>
+    <string name="home_backup">备份</string>
+
+    <!-- 聊天（升级版） -->
+    <string name="chat_title">对话</string>
+    <string name="chat_input_hint">输入消息…</string>
+    <string name="chat_send">发送</string>
+    <string name="chat_voice">语音</string>
+    <string name="chat_image">图片</string>
+    <string name="chat_video">视频</string>
+    <string name="chat_file">文件</string>
+    <string name="chat_url">网址</string>
+    <string name="chat_received">已收到对应文件，是否加入知识库学习或仅临时使用？</string>
+    <string name="chat_learn">加入知识库</string>
+    <string name="chat_temp">仅临时使用</string>
+    <!-- 新增聊天字符串 -->
+    <string name="chat_camera">拍照</string>
+    <string name="chat_record_video">录像</string>
+    <string name="chat_audio_call">音频通话</string>
+    <string name="chat_video_call">视频通话</string>
+    <string name="chat_search">搜索</string>
+    <string name="chat_search_hint">搜索对话内容...</string>
+    <string name="chat_clear_all">清空对话</string>
+    <string name="chat_clear_confirm">确定要删除所有对话记录吗？此操作不可恢复。</string>
+    <string name="chat_clear_success">对话记录已清空</string>
+    <string name="chat_search_no_result">未找到包含「%s」的消息</string>
+    <string name="chat_search_result">找到 %1$d 条包含「%2$s」的消息</string>
+
+    <!-- 通话 -->
+    <string name="call_connecting">正在连接...</string>
+    <string name="call_in_progress">正在通话中...</string>
+    <string name="call_muted">已静音</string>
+    <string name="call_unmuted">已取消静音</string>
+    <string name="call_hang_up">挂断</string>
+    <string name="call_mute">静音</string>
+    <string name="call_speaker">扬声器</string>
+    <string name="call_ended">通话已结束</string>
+    <string name="call_started">通话已开始</string>
+
+    <!-- 化身 -->
+    <string name="avatar_title">化身编辑</string>
+    <string name="avatar_preview">化身预览</string>
+    <string name="avatar_gender">性别</string>
+    <string name="avatar_personality">性格</string>
+    <string name="avatar_age">年龄外观</string>
+    <string name="avatar_style">外表风格</string>
+    <string name="avatar_outfit">服装</string>
+    <string name="avatar_color">主色调</string>
+    <string name="avatar_hair">发型</string>
+    <string name="avatar_eyes">瞳色</string>
+    <string name="avatar_save">保存</string>
+    <string name="avatar_reset">重置</string>
+    <string name="avatar_identity_note">更换外观不变更GUID身份/人格/意识</string>
+
+    <!-- 状态仪表盘 -->
+    <string name="dashboard_title">意识状态仪表盘</string>
+    <string name="metric_neuron">仿生神经元总数</string>
+    <string name="metric_synapse">突触连接密度</string>
+    <string name="metric_myelin">神经髓鞘完整度</string>
+    <string name="metric_spontaneous">内源自发激活率</string>
+    <string name="metric_hippocampus">海马体记忆容量</string>
+    <string name="metric_mirror">镜像共情神经元</string>
+    <string name="metric_metacog">元认知指数</string>
+    <string name="metric_evolution">人格进化阶段</string>
+
+    <!-- 导入导出 -->
+    <string name="import_export_title">导入导出管理</string>
+    <string name="import_brain">导入意识数据(.brain)</string>
+    <string name="import_memory">导入记忆数据</string>
+    <string name="import_migrate">从其他设备迁移</string>
+    <string name="export_brain">导出意识数据(.brain)</string>
+    <string name="export_memory">导出记忆数据</string>
+    <string name="export_full">完整备份（意识+记忆）</string>
+    <string name="export_gguf">导出为GGUF格式（预留）</string>
+    <string name="backup_history">备份历史</string>
+
+    <!-- 五感状态 -->
+    <string name="perception_title">五感状态</string>
+    <string name="perception_vision">👁️ 视觉</string>
+    <string name="perception_audio">👂 听觉</string>
+    <string name="perception_tts">👄 语音输出</string>
+    <string name="perception_touch">✋ 触觉</string>
+    <string name="perception_network">🌐 网络感知</string>
+    <string name="perception_enabled">已启用</string>
+    <string name="perception_disabled">已禁用</string>
+    <string name="perception_working">工作中</string>
+    <string name="perception_idle">待机中</string>
+
+    <!-- 设置 -->
+    <string name="settings_title">设置</string>
+    <string name="settings_switches">全局开关管理</string>
+    <string name="settings_permission">权限等级</string>
+    <string name="settings_mind_mode">心智模式</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_version">版本信息</string>
+    <!-- 新增设置字符串 -->
+    <string name="settings_chat_history">对话历史管理</string>
+    <string name="settings_max_messages">最大保留条数</string>
+    <string name="settings_max_messages_desc">超过此数量后自动删除最早的对话记录</string>
+
+    <!-- 意识界面 -->
+    <string name="consciousness_title">🧠 意识</string>
+    <string name="consciousness_evolution_proposals">🧬 自我进化提案</string>
+    <string name="consciousness_import_export">📦 意识导入导出</string>
+    <string name="metric_neuron_count">神经元数量</string>
+    <string name="metric_commonsense_count">基本常识</string>
+    <string name="metric_permanent_memory">永久记忆</string>
+    <string name="metric_keyword_count">关键词</string>
+    <string name="metric_keyword_entry_count">关键词条</string>
+    <string name="metric_concept_node_count">概念节点</string>
+    <string name="metric_summary_index_count">概要搜引</string>
+    <string name="metric_causal_triple">因果三元组</string>
+    <string name="metric_axiom_usage">公理层使用率</string>
+    <string name="metric_consciousness_activity">意识活跃度</string>
+    <string name="btn_generate_proposal">生成新提案</string>
+    <string name="btn_execute_proposal">执行</string>
+    <string name="proposal_impact_label">预计影响: </string>
+    <string name="btn_export_consciousness">📤 导出意识</string>
+    <string name="btn_import_consciousness">📥 导入意识</string>
+    <string name="btn_export_memory">💾 导出记忆</string>
+    <string name="btn_import_memory">💿 导入记忆</string>
+
+    <!-- 通用 -->
+    <string name="btn_confirm">确认</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_reset">重置</string>
+    <string name="loading">加载中…</string>
+</resources>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/soul_surface"
+        app:title="🖐️ 五感状态"
+        app:titleTextColor="@color/soul_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 视觉 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardVision"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="👁️ 视觉 (VisionModule)"
+                            android:textSize="15sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvVisionStatus" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="待机中"
+                            android:textSize="13sp" android:textColor="@color/status_online"/>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tvVisionDetail" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="状态: 已启用\n自动截图: 运行中\n最近识别: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 听觉 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAudio"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="👂 听觉 (AudioModule)"
+                            android:textSize="15sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvAudioStatus" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="待机中"
+                            android:textSize="13sp" android:textColor="@color/status_online"/>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tvAudioDetail" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="ASR语音识别: 已启用\nVAD语音检测: 就绪\n最近识别: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 语音输出 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTts"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="👄 语音输出 (TTS)"
+                            android:textSize="15sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvTtsStatus" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="待机中"
+                            android:textSize="13sp" android:textColor="@color/status_online"/>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tvTtsDetail" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="TTS引擎: 系统默认\n语速: 1.0x\n状态: 就绪"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 触觉 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTouch"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="✋ 触觉 (TouchModule)"
+                            android:textSize="15sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvTouchStatus" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="运行中"
+                            android:textSize="13sp" android:textColor="@color/status_online"/>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tvTouchDetail" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="手势识别: 已启用\n触屏交互: 活跃\n最近手势: —"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 网络感知 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardNetwork"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="14dp" app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="🌐 网络感知 (NetworkVision)"
+                            android:textSize="15sp" android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                        <TextView android:id="@+id/tvNetworkStatus" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="待机中"
+                            android:textSize="13sp" android:textColor="@color/status_offline"/>
+                    </LinearLayout>
+                    <TextView android:id="@+id/tvNetworkDetail" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                        android:textSize="12sp" android:textColor="@color/soul_text_secondary"
+                        android:text="局域网连接: 未连接\n发现设备: 0\nP2P状态: 空闲"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

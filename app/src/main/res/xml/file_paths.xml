@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- .brain文件存储路径配置 -->
+<paths>
+    <files-path name="brain_files" path="brain/" />
+    <files-path name="backup_files" path="backup/" />
+    <cache-path name="brain_cache" path="brain_cache/" />
+</paths>

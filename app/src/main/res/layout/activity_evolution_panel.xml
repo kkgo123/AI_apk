@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  activity_evolution_panel.xml - 自我进化控制面板布局
+  
+  结构：
+  - Toolbar
+  - ScrollView
+    - 统计卡片（版本号/进化次数/最近时间/插件数）
+    - 进化历史区
+    - 已加载插件区
+    - 操作按钮区
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soul_background">
+
+    <!-- 顶部工具栏 -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/soul_surface"
+        app:title="🧬 自我进化面板"
+        app:titleTextColor="@color/soul_primary"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ═══ 统计区 ═══ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📊 进化统计"
+                android:textSize="16sp"
+                android:textColor="@color/soul_accent"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <!-- 2x2网格统计 -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:padding="16dp"
+                    android:useDefaultMargins="true">
+
+                    <!-- 版本号 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/tvEvolutionVersion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="v0"
+                            android:textSize="24sp"
+                            android:textColor="@color/soul_primary"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前版本"
+                            android:textSize="11sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <!-- 进化次数 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/tvTotalEvolutions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 次"
+                            android:textSize="24sp"
+                            android:textColor="@color/soul_accent"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="总进化次数"
+                            android:textSize="11sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <!-- 最近进化 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/tvLastEvolution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="暂无"
+                            android:textSize="14sp"
+                            android:textColor="@color/soul_text_primary"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="最近进化"
+                            android:textSize="11sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <!-- 已加载插件 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/tvLoadedPluginCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 个"
+                            android:textSize="24sp"
+                            android:textColor="@color/progress_evolution"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已加载插件"
+                            android:textSize="11sp"
+                            android:textColor="@color/soul_text_secondary"
+                            android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                </GridLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ 待处理提案区 ═══ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📋 待处理提案"
+                android:textSize="16sp"
+                android:textColor="@color/soul_accent"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:id="@+id/llProposals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvEmptyProposals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp"
+                    android:gravity="center"
+                    android:text="📭 暂无待处理提案\nAI将自动生成进化建议"
+                    android:textSize="13sp"
+                    android:textColor="@color/soul_text_secondary"
+                    android:visibility="visible"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ 进化历史区 ═══ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📜 进化历史"
+                android:textSize="16sp"
+                android:textColor="@color/soul_accent"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:id="@+id/llEvolutionHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvEmptyHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp"
+                    android:gravity="center"
+                    android:text="📭 暂无进化记录\nAI还没有进行过自我修改"
+                    android:textSize="13sp"
+                    android:textColor="@color/soul_text_secondary"
+                    android:visibility="visible"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ 已加载插件区 ═══ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔌 已加载插件"
+                android:textSize="16sp"
+                android:textColor="@color/soul_accent"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:id="@+id/llLoadedPlugins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvEmptyPlugins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp"
+                    android:gravity="center"
+                    android:text="🔌 暂无已加载插件\n触发进化后插件将显示在这里"
+                    android:textSize="13sp"
+                    android:textColor="@color/soul_text_secondary"
+                    android:visibility="visible"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══ 操作区 ═══ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎮 操作"
+                android:textSize="16sp"
+                android:textColor="@color/soul_accent"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/soul_surface"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 触发进化 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTriggerEvolution"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="🚀 触发AI进化"
+                        android:textSize="14sp"
+                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/soul_primary"/>
+
+                    <!-- 回滚 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRollback"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:text="↩️ 回滚到上一版本"
+                        android:textSize="14sp"
+                        app:cornerRadius="12dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                    <!-- 清空日志 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnClearLogs"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:text="🗑️ 清空进化日志"
+                        android:textSize="14sp"
+                        android:textColor="@color/status_error"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="@color/status_error"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 底部间距 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
